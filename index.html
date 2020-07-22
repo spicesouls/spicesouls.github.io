@@ -1,0 +1,53 @@
+<head>
+
+</head>
+<body>
+	<style>
+		.rainbow-text {
+		  background-image: repeating-linear-gradient(45deg, violet, indigo, blue, green, yellow, orange, red, violet);
+		  text-align: center;
+		  background-size: 800% 800%;
+		  -webkit-background-clip: text;
+		  -webkit-text-fill-color: transparent;
+		  font-size: 24px;
+		  animation: rainbow 1s ease infinite;
+		}
+
+		@keyframes rainbow { 
+		    0%{background-position:0% 50%}
+		    50%{background-position:100% 25%}
+		    100%{background-position:0% 50%}
+		}
+		@keyframes title {
+			0% {text-shadow: 1px 1px 1px #aaa;}
+			33% {text-shadow: 2px 2px 2px #aaa;}
+			66% {text-shadow: 3px 3px 3px #aaa;}
+			99% {text-shadow: 4px 4px 4px #aaa;}
+
+		}
+
+		.icon {
+			position:relative; top: 200px; width: 100px; opacity: 50%;
+		}
+
+		.icon:hover {
+			opacity: 100%;
+		}
+
+		html { 
+		  background: url(https://i.imgur.com/Am0rbSB.gif) no-repeat center center fixed; 
+		  -webkit-background-size: cover;
+		  -moz-background-size: cover;
+		  -o-background-size: cover;
+		  background-size: cover;
+		}
+	</style>
+	<center>
+
+		<h1><span style="background-color: #000000;"><strong><span class="rainbow-text" style="font-size: 64px; color: #ffffff; font-family: Monaco, monospace
+; animation: title 1s ease infinite; animation-iteration-count:infinite;">Spice Souls</span></strong></span></h1>
+		<a href="https://steamcommunity.com/id/SpiceSouls/"><img src="https://cdn3.iconfinder.com/data/icons/popular-services-brands-vol-2/512/steam-512.png" class="icon"/></a>
+		<a href="https://github.com/spicesouls"><img src="https://cdn0.iconfinder.com/data/icons/octicons/1024/mark-github-512.png" class="icon"/></a>
+		<a href="https://twitter.com/SpicysoulsV"><img src="https://egcc.edu/wp-content/uploads/2017/01/twitter-icon-basic-round-social-iconset-s-icons-0.png" class="icon"/></a>
+	</center>
+</body>
