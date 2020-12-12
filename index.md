@@ -12,7 +12,7 @@
 
 [📷 Basilisk](https://spicesouls.github.io/basilisk) - A Tool using Shodan and RTSP to find vulnerable cameras around the world.
 
-🔑 Exodus - Fast network wide password spraying. (COMING SOON)
+[🔑 Exodus](https://spicesouls.github.io/exodus) - Fast network wide password spraying.
 
 [🖨️ Misprint](https://github.com/spicesouls/misprint) - Hacking Printers using Python, Shodan, and alot of paper!
 
