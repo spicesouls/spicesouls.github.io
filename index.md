@@ -10,6 +10,8 @@
 
 # 🗃️ Projects
 
+[☠️ Reosploit](https://spicesouls.github.io/reosploit) - A Tool that Finds, Enumerates and Exploits Reolink Cameras.
+
 [📷 Basilisk](https://spicesouls.github.io/basilisk) - A Tool using Shodan and RTSP to find vulnerable cameras around the world.
 
 [🔑 Exodus](https://spicesouls.github.io/exodus) - Fast network wide password spraying.
