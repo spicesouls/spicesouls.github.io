@@ -23,5 +23,3 @@
 [Twitter](https://twitter.com/SpicySoulsV)
 
 [Blog](https://beyondrootsec.wordpress.com)
-
-#### *Donate me some Bitcoin! 1CQvmpRCDasK7YKyjsQTZPUobRygqt86t7*
