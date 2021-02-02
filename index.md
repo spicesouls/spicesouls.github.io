@@ -10,13 +10,13 @@
 
 # 🗃️ Projects
 
+[🦆 Ducker](https://spicesouls.github.io/ducker) - A lightweight ducky script generator written in python.
+
 [☠️ Reosploit](https://spicesouls.github.io/reosploit) - A Tool that Finds, Enumerates and Exploits Reolink Cameras.
 
 [📷 Basilisk](https://spicesouls.github.io/basilisk) - A Tool using Shodan and RTSP to find vulnerable cameras around the world.
 
 [🔑 Exodus](https://spicesouls.github.io/exodus) - Fast network wide password spraying.
-
-[🖨️ Misprint](https://github.com/spicesouls/misprint) - Hacking Printers using Python, Shodan, and alot of paper!
 
 # 📡 Media
 
