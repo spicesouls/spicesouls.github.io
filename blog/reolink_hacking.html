@@ -1,0 +1,167 @@
+
+<!--
+Looking at source code are we?
+             ___          
+            /   \\        
+       /\\ | . . \\       
+     ////\\|     ||       
+   ////   \\ ___//\       
+  ///      \\      \      
+ ///       |\\      |     
+//         | \\  \   \    
+/          |  \\  \   \   
+           |   \\ /   /   
+           |    \/   /    
+           |     \\/|     
+           |      \\|     
+           |       \\     
+           |        |     
+           |_________\    
+-->
+
+<html>
+  <head>
+    <meta name="og:title" content="Projects"/>
+    <meta name="og:image" content="https://media3.giphy.com/media/QbumCX9HFFDQA/200.gif"/>
+    <meta name="og:site_name" content="SpiceSouls"/>
+    <title>SpiceSouls - Home</title>
+    <style>
+      body {
+        font-family: 'Courier New', monospace;
+        font-size: 12px;
+		background-color: black;
+		color: white;
+      }
+	  center {
+		color: #FF00D7;
+	  }
+	  h2 {
+		color: #00FF69;
+		font-weight: bold;
+	  }
+	  a {
+		color: #FFE800;
+		font-weight: bold;
+	  }
+	  a:hover, a:active {
+		opacity: 0.7;
+	  }
+	  .limit{
+		width:500px;
+		word-wrap: break-word;
+	  }
+    </style>
+  </head>
+
+  <body>
+    <center>
+      <a href='/index.html' style='color: #FF00D7; text-decoration: none;'><pre>
+     _______..______    __    ______  _______     _______.  ______    __    __   __          _______.
+    /       ||   _  \  |  |  /      ||   ____|   /       | /  __  \  |  |  |  | |  |        /       |
+   |   (----`|  |_)  | |  | |  ,----'|  |__     |   (----`|  |  |  | |  |  |  | |  |       |   (----`
+    \   \    |   ___/  |  | |  |     |   __|     \   \    |  |  |  | |  |  |  | |  |        \   \    
+.----)   |   |  |      |  | |  `----.|  |____.----)   |   |  `--'  | |  `--'  | |  `----.----)   |   
+|_______/    | _|      |__|  \______||_______|_______/     \______/   \______/  |_______|_______/    
+	  </pre>
+		<h2>
+			<a href='/' style='text-decoration: none;'> « home » </a> 
+			<a href='/projects' style='text-decoration: none;'> « projects » </a>
+			<a href='https://github.com/spicesouls/spicesouls.github.io' style='text-decoration: none;'> « github » </a> 
+		</h2>
+		<img src='https://media3.giphy.com/media/QbumCX9HFFDQA/200.gif' />
+    </center>
+	
+	<center style='font-family: "Courier New", monospace; color: white;'>
+		<h2>### Exploiting Reolink [2020-12-20] ###</h2>
+		
+		<div class="limit"><p>
+Recently, I finished the development of a tool known as ReoSploit on my Github.<br>
+This tool was made to find, enumerate and exploit Reolink Cameras. Why did I make this? Out of boredom really, but the more research I did the more vulnerable I realised the models were. First of all, for testing this I used the model RLC-410-5MP, with the latest firmware (as of now) v3.0.0.116_20103100. Now, let me take you on a magical adventure of how YOU could stalk someone through a Reolink camera!<br>
+<br>
+What you'll need:<br>
+=================<br>
+- LAN Access<br>
+- A Basic Knowledge of Intercepting Network Traffic<br>
+… and that is it! You can try this at home if you have a Reolink Camera, and you can use Reosploit to help you do so! Just remember, please do this ONLY on YOUR devices or if you have been given explicit permission!<br>
+<br>
+Discovery<br>
+=========<br>
+<br>
+This part is really basic, for Reosploit I just made it look through a range of IPs and see which ones had a web page that held attributes similar to Reolink devices.<br>
+> sudo ./reosploit.py 192.168.1.0/24 scan<br>
+<br>
+This is also threaded, so it is very fast. Best part about Reolink cameras? They all have the same front page! So it is very easy to distinguish them. For the sake of the upcoming examples, let’s say we find that 192.168.1.10 is a working Reolink camera.<br>
+<br>
+Enumeration<br>
+===========<br>
+<br>
+Now we get to the good stuff. Now we have possible Targets, we should first try to intercept some credentials. Reolink cameras use HTTP (even if you try to use HTTPS it refuses), so as long as you can use a tool like Ettercap to intercept the traffic between the Reolink camera and a client, it will be easy to find the packet with login credentials in. You’re probably asking “how do I know who is gonna use the camera and who isn’t?”, well no need to worry! Reolink cameras every 10-60 seconds send a packet to see if the client is still connected, which we can intercept to see who is logged on as who! (Don’t worry, it gets worse.)<br>
+> sudo ./reosploit.py 192.168.1.10 listen -i (network interface)<br>
+<br>
+Once we’ve started intercepting traffic, we can use ReoSploit to listen and distinguish the important traffic from the bogus. This will show us Credentials being sent, Logged-in sessions, etc. In the future I’ll see what other data I could extract from it, but for now that’s all we need to get a username and password.<br>
+After that, we can use ReoSploit again to enumerate the Reolink camera with the credentials!<br>
+> sudo ./reosploit.py 192.168.1.10 enumerate -u (user) -p (password)<br>
+<br>
+Exploitation<br>
+============<br>
+<br>
+I plan on adding more to the exploitation part as it is fun, cool, and very fun. But for now, we can use ReoSploit and the credentials we have found to generate an Authentication Token if we want to abuse the API further (sounds boring, until you realise you can reboot it :P)<br>
+> sudo ./reosploit.py 192.168.1.10 token -u (username) -p (password)<br>
+<br>
+And we can also use it for, my favourite part, taking a photo through the camera with little to no trace, as it uses the API directly.<br>
+> sudo ./reosploit.py 192.168.1.10 snap -u (username) -p (password)<br>
+(By default it’ll save to /tmp/snap.jpg)<br>
+<br>
+So, what have we learnt? Well, I think security cameras being massively vulnerable like this is a great example of why so many other things are as vulnerable as they are – everyone secures things with the cameras, but who thinks to properly secure the cameras themselves?<br>
+Don’t get me wrong, Reolink are a great camera brand and very easy and simple to use and sync with protocols like FTP, and I’d definitely recommend them, I just want to make you aware of some of the features you may not be aware of as an owner.<br>
+<br>
+But hey, at least they aren’t exposed to the internet right? Haha…<br>
+<br><br><br>
+--- END ---
+
+		</p></div>
+		
+		
+		
+	</center>
+	
+	<pre style='bottom:0px; left:2px; position:absolute;'>
+                                         .""--..___
+                     _                     []      ```-.._
+                  .'` `'.                  ||__           `-._
+                 /    ,-.\                 ||_ ```---..__     `-.
+                /    /:::\\               /|//}          ``--._  `.
+                |    |:::||              |////}                `-. \
+                |    |:::||             //'///                    `.\
+                |    |:::||            //  ||'                      `|
+        jgs     /    |:::|/        _,-//\  ||
+        hh     /`    |:::|`-,__,-'`  |/  \ ||
+             /`  |   |'' ||           \   |||
+           /`    \   |   ||            |  /||
+         |`       |  |   |)            \ | ||
+        |          \ |   /      ,.__    \| ||
+        /           `         /`    `\   | ||
+       |                     /        \  / ||
+       |                     |        | /  ||
+       /         /           |        `(   ||
+      /          .           /          )  ||
+     |            \          |     ________||
+    /             |          /     `-------.|
+   |\            /          |              ||
+   \/`-._       |           /              ||
+    //   `.    /`           |              ||
+   //`.    `. |             \              ||
+  ///\ `-._  )/             |              ||
+ //// )   .(/               |              ||
+ ||||   ,'` )               /              //
+ ||||  /                    /             || 
+ `\\` /`                    |             // 
+     |`                     \            ||  
+    /                        |           //  
+  /`                          \         //   
+/`                            |        ||    
+`-.___,-.      .-.        ___,'        (/    
+         `---'`   `'----'`
+	</pre>
+  </body>
+</html>
