@@ -5,9 +5,6 @@
 		<meta name="og:site_name" content="SpiceSouls"/>
 		<title>monkey</title>
 		<style>
-			body {
-				background-image: url(https://images.everydayhealth.com/images/diet-nutrition/all-about-bananas-nutrition-facts-health-benefits-recipes-and-more-rm-722x406.jpg)
-			}
 			h1 {
 				color: white
 			}
@@ -43,6 +40,19 @@
 			<img src="mnk4.gif" />
 			<p>😳😳😳</p>
 		</div>
-		
+		<script>
+			function run(){
+			var password = prompt("Password Please");
+			if(password != 'password'){
+			document.body.innerHTML = '';
+			document.body.innerHTML = 'Password Failed! Reload to Renter Password';
+			}else{
+			alert('Success');
+			document.body.style.backgroundImage = "url('https://images.everydayhealth.com/images/diet-nutrition/all-about-bananas-nutrition-facts-health-benefits-recipes-and-more-rm-722x406.jpg')"
+			}
+			}
+			run();
+		</script>
 	</body>
+	
 </html>
